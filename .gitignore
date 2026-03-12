@@ -1,0 +1,43 @@
+# See https://docs.github.com/get-started/getting-started-with-git/ignoring-files for more about ignoring files.
+
+# Compiled output
+/frontend/ftp-manager/dist
+/frontend/ftp-manager/tmp
+/frontend/ftp-manager/out-tsc
+/frontend/ftp-manager/bazel-out
+
+# Node
+/frontend/ftp-manager/node_modules
+/frontend/ftp-manager/npm-debug.log
+/frontend/ftp-manager/yarn-error.log
+/backend/node_modules
+
+# IDEs and editors
+/frontend/ftp-manager/.idea/
+/frontend/ftp-manager/.project
+/frontend/ftp-manager/.classpath
+/frontend/ftp-manager/.c9/
+/frontend/ftp-manager/*.launch
+/frontend/ftp-manager/.settings/
+/frontend/ftp-manager/*.sublime-workspace
+
+# Visual Studio Code
+/frontend/ftp-manager/.vscode/*
+/frontend/ftp-manager/!.vscode/settings.json
+/frontend/ftp-manager/!.vscode/tasks.json
+/frontend/ftp-manager/!.vscode/launch.json
+/frontend/ftp-manager/!.vscode/extensions.json
+/frontend/ftp-manager/.history/*
+
+# Miscellaneous
+/frontend/ftp-manager/.angular/cache
+/frontend/ftp-manager/.sass-cache/
+/frontend/ftp-manager/connect.lock
+/frontend/ftp-manager/coverage
+/frontend/ftp-manager/libpeerconnection.log
+/frontend/ftp-manager/testem.log
+/frontend/ftp-manager/typings
+
+# System files
+/frontend/ftp-manager/.DS_Store
+/frontend/ftp-manager/Thumbs.db

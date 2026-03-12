@@ -1,0 +1,11 @@
+<div class="popup-overlay" (click)="close.emit()">
+
+  <div class="video-wrapper" (click)="$event.stopPropagation()">
+    <button class="close-btn" (click)="close.emit()">FERMER</button>
+
+    <video controls autoplay [src]="videoUrl">
+      Votre navigateur ne supporte pas la lecture.
+    </video>
+  </div>
+
+</div>

@@ -1,0 +1,56 @@
+<div class="page-container">
+
+  <div class="header-actions">
+    <h1 class="title"><u>FTP</u> : Caméra Dectect Motion & Partage de fichiers</h1>
+    <button class="btn btn-logout" (click)="logout()">Déconnexion</button>
+  </div>
+
+  <div class="tabs-container">
+    <button class="tab-btn" [class.active]="currentFolder === 'camera'" (click)="switchTab('camera')">
+      <span>📹</span> Caméra
+    </button>
+
+    <button class="tab-btn" [class.active]="currentFolder === 'shared'" (click)="switchTab('shared')">
+      <span>📂</span> Fichiers Partagés
+    </button>
+  </div>
+
+  <div class="upload-zone" *ngIf="currentFolder === 'shared'">
+    <label class="upload-btn">
+      📁 Choisir un fichier à ajouter
+      <input type="file" (change)="onFileSelected($event)" hidden>
+    </label>
+  </div>
+
+  <table class="video-table">
+    <thead>
+      <tr>
+        <th>Date</th>
+        <th>Nom</th>
+        <th>Taille</th>
+        <th class="actions-col">Actions</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let video of videos">
+        <td>{{ video.createdAt | date:'dd/MM/yyyy HH:mm' }}</td>
+        <td class="file-name">{{ video.name }}</td>
+        <td>{{ (video.size / (1024 * 1024)) | number:'1.2-2' }} Mo</td>
+        <td class="actions">
+          <button *ngIf="currentFolder === 'camera'" class="btn btn-view" (click)="view(video)">
+            Voir
+          </button>
+          <button class="btn btn-download" (click)="download(video)">Télécharger</button>
+          <button *ngIf="userRole === 'admin' || currentFolder === 'shared'" 
+              class="btn btn-delete" (click)="delete(video)">
+            Supprimer
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <app-video-popup *ngIf="showPopup" [videoUrl]="selectedVideoUrl" (close)="closePopup()">
+  </app-video-popup>
+</div>

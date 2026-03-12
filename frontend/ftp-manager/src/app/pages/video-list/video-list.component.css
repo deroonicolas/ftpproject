@@ -1,0 +1,172 @@
+/* Page */
+.page-container {
+  padding: 30px;
+  background: #1e1e1e;
+  min-height: 100vh;
+  color: #e6e6e6;
+  font-family: "Segoe UI", Roboto, sans-serif;
+}
+
+.title {
+  font-size: 28px;
+  margin-bottom: 25px;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+/* Table */
+.video-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #2a2a2a;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.video-table thead {
+  background: #333;
+}
+
+.video-table th,
+.video-table td {
+  padding: 14px 18px;
+  text-align: left;
+}
+
+.video-table tbody tr {
+  border-bottom: 1px solid #3a3a3a;
+}
+
+.video-table tbody tr:hover {
+  background: #3a3a3a;
+}
+
+/* Actions */
+.actions-col {
+  width: 260px;
+}
+
+.actions {
+  display: flex;
+  gap: 10px;
+}
+
+/* Boutons */
+.btn {
+  padding: 8px 14px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: 0.2s;
+  color: white;
+}
+
+.btn-view {
+  background: #0078d4;
+}
+
+.btn-view:hover {
+  background: #0a84e6;
+}
+
+.btn-download {
+  background: #4caf50;
+}
+
+.btn-download:hover {
+  background: #5ecf63;
+}
+
+.btn-delete {
+  background: #d9534f;
+}
+
+.btn-delete:hover {
+  background: #e66562;
+}
+
+/* Conteneur pour mettre le titre et le bouton sur la même ligne */
+.header-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+}
+
+/* Style spécifique pour le bouton déconnexion */
+.btn-logout {
+  background: #444; /* Gris discret par défaut */
+  border: 1px solid #555;
+  padding: 8px 20px;
+  font-weight: bold;
+}
+
+.btn-logout:hover {
+  background: #d9534f; /* Devient rouge au survol pour indiquer une action forte */
+  border-color: #d43f3a;
+}
+
+/* Conteneur des onglets centré */
+.tabs-container {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin: 20px 0;
+  padding: 5px;
+  background: #1e1e1e; /* Fond sombre comme ton tableau */
+  border-radius: 12px;
+}
+
+/* Style des boutons */
+.tab-btn {
+  padding: 10px 24px;
+  border: none;
+  border-radius: 8px;
+  background: transparent;
+  color: #a0a0a0;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Effet au survol */
+.tab-btn:hover {
+  background: rgba(255, 255, 255, 0.05);
+  color: #fff;
+}
+
+/* Onglet actif (Bleu moderne) */
+.tab-btn.active {
+  background: #007bff;
+  color: white;
+  box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3);
+}
+
+/* Icônes */
+.tab-btn i {
+  font-size: 1.1em;
+}
+
+.upload-zone {
+  display: flex;
+  justify-content: center;
+  margin: 15px 0;
+}
+
+.upload-btn {
+  background: #28a745; /* Vert pour l'upload */
+  color: white;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.upload-btn:hover {
+  background: #218838;
+  transform: translateY(-2px);
+}

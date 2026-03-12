@@ -1,0 +1,9 @@
+<div class="login-wrapper">
+  <div class="login-card">
+    <h2>Accès FTP NAS Caméra</h2>
+    <p>Veuillez entrer le mot de passe pour accéder aux vidéos du FTP du NAS.</p>
+
+    <input type="password" #pwd (keyup.enter)="valider(pwd.value)" placeholder="Mot de passe">
+    <button (click)="valider(pwd.value)">Se connecter</button>
+  </div>
+</div>

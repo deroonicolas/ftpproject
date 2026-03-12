@@ -1,0 +1,50 @@
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(1, 1, 1, 0.5); /* Fond semi-transparent */
+  backdrop-filter: blur(1px); /* Effet de flou sur l'arrière-plan */
+
+  /* C'est ici que la magie du centrage opère */
+  display: flex;
+  flex-direction: column; /* Aligne bouton et vidéo l'un sur l'autre */
+  justify-content: center; /* Centre verticalement */
+  align-items: center; /* Centre horizontalement */
+
+  z-index: 1000;
+}
+
+.video-wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Aligne le bouton FERMER au centre du wrapper */
+  width: 90%;
+  max-width: 800px; /* Limite la largeur pour que ce soit beau */
+}
+
+.close-btn {
+  background: #ff4d4d;
+  color: white;
+  border: none;
+  padding: 10px 25px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-bottom: 15px; /* Espace entre le bouton et la vidéo */
+  font-weight: bold;
+  font-size: 16px;
+  transition: transform 0.2s;
+}
+
+.close-btn:hover {
+  transform: scale(1.05); /* Petit effet au survol */
+}
+
+video {
+  width: 100%; /* Prend toute la largeur du wrapper */
+  border-radius: 8px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  background: black; /* Évite les flashs blancs au chargement */
+}
