@@ -26,7 +26,7 @@ const FTP_CONFIG = {
 };
 
 const FTP_PATHS = {
-    camera: "/FI9816P_00626EEC9763/record",
+    camera: "/FI9816P_00626EEC9763/record", 
     shared: "/shared_files"
 };
 
@@ -69,9 +69,9 @@ app.get('/api/files/:folder', authenticateToken, async (req, res) => {
     const client = new ftp.Client();
 
     try {
-        console.log(FTP_CONFIG);
         await client.access(FTP_CONFIG);
         const list = await client.list(remotePath);
+        console.log("LOG DEBUG - Contenu brut du FTP :", list);
         
         // On transforme le format FTP en format compatible avec ton tableau Angular
         const files = list
@@ -237,7 +237,7 @@ app.listen(PORT, () => {
 //     cb(null, PATHS.shared);    },    filename: (req, file, cb) => {        
 //         // On garde le nom d'origine avec un timestamp pour éviter les doublons        
 //         const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);        cb(null, uniqueSuffix + '-' + file.originalname);    }});const upload = multer({ storage: storage });
-        
+    
 // // 5. ROUTES API
 // // Route d'upload
 // app.post('/api/upload', upload.single('file'), (req, res) => {    if (!req.file) {        return res.status(400).json({ error: "Aucun fichier reçu." });    }    console.log(`✅ Fichier sauvegardé avec succès dans : ${req.file.path}`);    res.status(201).json({         message: "Fichier écrit sur le NAS !",        path: req.file.path     });});
