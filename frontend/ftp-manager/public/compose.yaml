@@ -1,0 +1,84 @@
+# Début de la définition des services (conteneurs) de l'application
+services:
+  # Service FTP pour recevoir les vidéos dans le réseau interne Docker
+  ftp:
+    # Utilise l'image légère et stable de Pure-FTPd
+    image: stilliard/pure-ftpd
+    # Nom fixe du conteneur (utilisé pour le service backend)
+    container_name: ftp
+    # Relance automatiquement le serveur si le NAS redémarre ou s'il plante
+    restart: always
+    # Bloc des variables de configuration
+    environment:
+      # IP locale du NAS pour que la caméra sache où envoyer les données
+      PUBLICHOST: "192.168.1.96"
+      # Nom d'utilisateur pour la connexion FTP (caméra et backend)
+      FTP_USER_NAME: "admin_ftp"
+      # Mot de passe sécurisé pour l'accès FTP
+      FTP_USER_PASS: "Admin99"
+      # Définit le dossier racine où l'utilisateur arrive à la connexion
+      FTP_USER_HOME: "/home/ftpusers/admin_ftp"
+      # Autorise jusqu'à 10 connexions simultanées
+      MAX_CLIENTS_NUMBER: 10
+      # Limite à 10 connexions par appareil pour éviter les saturations
+      MAX_CLIENTS_PER_IP: 10
+    # Liaison entre les dossiers du NAS et ceux du conteneur
+    volumes:
+      # Miroir : tout ce qui arrive dans le FTP va sur le disque dur du NAS (pas de perte)
+      - "/volume1/ftp:/home/ftpusers/admin_ftp"
+    # Ouverture des portes de communication vers l'extérieur
+    ports:
+      # Port de commande FTP (indispensable pour la caméra)
+      - "21:21"
+      # Plage de ports pour le mode passif (indispensable pour le transfert de données)
+      - "30000-30009:30000-30009"
+
+  # Service Backend pour communiquer avec le conteneur ftp
+  backend:
+    # Construit l'image Docker à partir du Dockerfile situé dans le dossier ./backend
+    build: ./backend
+    # Nom fixe du conteneur
+    container_name: ftp-api
+    # Relance automatiquement le conteneur s'il plante ou si Docker redémarre
+    restart: always
+    # Redirige le port 3000 de la machine (hôte) vers le port 3000 du conteneur
+    ports:
+      - "3000:3000"
+    # Bloc des variables de configuration
+    environment:
+      # Clé de sécurité pour signer et vérifier les jetons de connexion (Tokens JWT)
+      - JWT_SECRET=JeNeVeuxPasQuonAccedeAMonSiteSansEtreAuthentifie!
+      # Adresse réseau du serveur FTP (ici, on cherche le service Docker nommé "ftp")
+      - FTP_HOST=ftp
+      # Identifiant pour se connecter au serveur FTP
+      - FTP_USER=admin_ftp
+      # Mot de passe pour se connecter au serveur FTP
+      - FTP_PASSWORD=Admin99
+    # Liaison entre les dossiers du NAS et ceux du conteneur
+    volumes:
+      # Lie le fichier local "users.json" au fichier dans le conteneur pour persister les données
+      - ./users.json:/app/users.json
+
+  # Service Interface Web (Frontend Angular)
+  frontend:
+    # Utilise une version ultra-légère de Nginx (basée sur Alpine Linux)
+    image: nginx:alpine
+    # Nom fixe du conteneur
+    container_name: ftp-ui
+    # Relance automatiquement le conteneur s'il plante ou si Docker redémarre
+    restart: always
+    volumes:
+      # Liaison entre les fichiers de code et le serveur web
+      # Prend les fichiers compilés du PC (dist) et les place là où Nginx sait les diffuser sur le web
+      - ./frontend/dist:/usr/share/nginx/html
+
+  # Service Tunnel Cloudflare (Accès distant sécurisé)
+  tunnel:
+    # Utilise l'image officielle de Cloudflare pour créer le connecteur
+    image: cloudflare/cloudflared:latest
+    # Nom fixe du conteneur
+    container_name: cloudflare-connector
+    # Relance automatiquement le conteneur s'il plante ou si Docker redémarre
+    restart: always
+    # Commande qui lance le tunnel sans mise à jour auto (plus stable) avec le jeton unique
+    command: tunnel --no-autoupdate run --token yJhIjoiOTdjZWEzYmNkOWM3NWNlOGY1ZjljZTU2ODQwMTUzYTMiLCJ0IjoiNDBlMDQ0YzYtODgyNi00OThiLTljMmUtYjQ3ZjFhZDAyOTI0IiwicyI6Ik16TXhNREEzTldJdFlURTFNaTAwTTJWaUxUZzJObVV0TldNNU56TTBaV0ZqWkdFeSJ9
