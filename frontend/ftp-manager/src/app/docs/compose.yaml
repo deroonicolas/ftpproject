@@ -80,5 +80,5 @@ services:
     container_name: cloudflare-connector
     # Relance automatiquement le conteneur s'il plante ou si Docker redémarre
     restart: always
-    # Commande qui lance le tunnel sans mise à jour auto (plus stable) avec le jeton unique
+    # Commande qui lance le tunnel sans mise à jour auto (plus stable) avec le jeton unique (lettre mistère à ajouter)
     command: tunnel --no-autoupdate run --token yJhIjoiOTdjZWEzYmNkOWM3NWNlOGY1ZjljZTU2ODQwMTUzYTMiLCJ0IjoiNDBlMDQ0YzYtODgyNi00OThiLTljMmUtYjQ3ZjFhZDAyOTI0IiwicyI6Ik16TXhNREEzTldJdFlURTFNaTAwTTJWaUxUZzJObVV0TldNNU56TTBaV0ZqWkdFeSJ9
